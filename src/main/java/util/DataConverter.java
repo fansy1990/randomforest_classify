@@ -25,7 +25,7 @@ public class DataConverter {
         // all attributes (categorical, numerical, label), ignored
         // get rid of label ,the data only contains (categorical, numerical),ignored
         int nball = dataset.nbAttributes() + dataset.getIgnored().length-1;
-// °ÑlabelÁÐÌí¼Óµ½vectorÖÐ£¬·½±ãÖ±½Óµ÷ÓÃforestµÄclassifyº¯Êý
+// æŠŠlabelåˆ—æ·»åŠ åˆ°vectorä¸­ï¼Œæ–¹ä¾¿ç›´æŽ¥è°ƒç”¨forestçš„classifyå‡½æ•°
         String[] tokens = string.split(splitter);
         Preconditions.checkArgument(tokens.length == nball,
                 "Wrong number of attributes in the string: " + tokens.length + ". Must be " + nball);
@@ -35,8 +35,8 @@ public class DataConverter {
 
         int aId = 0;
         for (int attr = 0; attr < nball;) {
-            if(dataset.getLabelId()==attr){//  label ÁÐËùÔÚÏÂ±ê
-                vector.set(aId++,0);// ¶ÔÓÚlabelÁÐÖ±½Ó¸³Öµ0
+            if(dataset.getLabelId()==attr){//  label åˆ—æ‰€åœ¨ä¸‹æ ‡
+                vector.set(aId++,0);// å¯¹äºŽlabelåˆ—ç›´æŽ¥èµ‹å€¼0
             }
             if (!ArrayUtils.contains(dataset.getIgnored(), attr)) {
                 String token = tokens[attr].trim();
@@ -52,8 +52,9 @@ public class DataConverter {
                     vector.set(aId, dataset.valueOf(aId, token));
                     aId++;
                 }
-                attr++;
+                
             }
+            attr++;
         }
 
         return new Instance(vector);
